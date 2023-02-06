@@ -8,6 +8,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart'; //flutter pub add shared_preferences
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 void main() {
   runApp(const MyApp());
@@ -59,7 +60,7 @@ class SharedPreferencesDemoState extends State<SharedPreferencesDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SharedPreferences Demo'),
+        title: const Text('Nigga2....'),
       ),
       body: Center(
           child: FutureBuilder<int>(
@@ -75,13 +76,13 @@ class SharedPreferencesDemoState extends State<SharedPreferencesDemo> {
                       return Text('Error: ${snapshot.error}');
                     } else {
                       return Text(
-                        'Button tapped ${snapshot.data} time${snapshot.data == 1 ? '' : 's'}.\n\n'
+                        'Button tapp1ed ${snapshot.data} time${snapshot.data == 1 ? '' : 's'}.\n\n'
                             'This should persist across restarts.',
                       );
                     }
                 }
               })),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: NeumorphicFloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
