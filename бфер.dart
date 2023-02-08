@@ -1,9 +1,3 @@
-// Copyright 2013 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-// ignore_for_file: public_member_api_docs
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -11,81 +5,40 @@ import 'package:shared_preferences/shared_preferences.dart'; //flutter pub add s
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Main(),
+      },
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class Main extends StatefulWidget {
+  const Main({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'SharedPreferences Demo',
-      home: SharedPreferencesDemo(),
-    );
-  }
+  MainState createState() => MainState();
 }
 
-class SharedPreferencesDemo extends StatefulWidget {
-  const SharedPreferencesDemo({Key? key}) : super(key: key);
-
-  @override
-  SharedPreferencesDemoState createState() => SharedPreferencesDemoState();
-}
-
-class SharedPreferencesDemoState extends State<SharedPreferencesDemo> {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  late Future<int> _counter;
-
-  Future<void> _incrementCounter() async {
-    final SharedPreferences prefs = await _prefs;
-    final int counter = (prefs.getInt('counter') ?? 0) + 1;
-
-    setState(() {
-      _counter = prefs.setInt('counter', counter).then((bool success) {
-        return counter;
-      });
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _counter = _prefs.then((SharedPreferences prefs) {
-      return prefs.getInt('counter') ?? 0;
-    });
-  }
+class MainState extends State<Main> {
+  final prefs = SharedPreferences.getInstance();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Nigga2....'),
+        title: const Text('N'),
       ),
       body: Center(
-          child: FutureBuilder<int>(
-              future: _counter,
-              builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none:
-                  case ConnectionState.waiting:
-                    return const CircularProgressIndicator();
-                  case ConnectionState.active:
-                  case ConnectionState.done:
-                    if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    } else {
-                      return Text(
-                        'Button tapp1ed ${snapshot.data} time${snapshot.data == 1 ? '' : 's'}.\n\n'
-                            'This should persist across restarts.',
-                      );
-                    }
-                }
-              })),
-      floatingActionButton: NeumorphicFloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        child: Row(
+          children: [
+            Image(image: AssetImage(""),),
+            NeumorphicText("15.4276", textStyle: Color(colors.black),),
+          ],
+        ),
       ),
     );
   }
